@@ -1,4 +1,4 @@
-import sqlite3
+import sqlite3, datetime, logging
 
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 from werkzeug.exceptions import abort
@@ -65,6 +65,20 @@ def create():
 
     return render_template('create.html')
 
+
+# Define the healthcheck
+@app.rout('/healthz')
+def healthz():
+    response = app.response_class(
+        response=json.dumps({}),
+        status=200,
+        mimetype='applications/json'
+    )
+    app.logger.info("Status request successfull")
+    logging.debug(f"{datetime.datetime.now()},{request.path} endpoint was reached.")
+    return json.dumps({"result": "OK - healthy"}), 200, {'ContentType': 'application/json'}
+
+  
 # start the application on port 3111
 if __name__ == "__main__":
    app.run(host='0.0.0.0', port='3111')
