@@ -22,6 +22,11 @@ def get_post(post_id):
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your secret key'
 
+# Total amount of posts in the database
+post_count = 0
+# Total amount of connections to the database
+db_connection_count = 0
+
 # Define the main route of the web application 
 @app.route('/')
 def index():
@@ -67,18 +72,29 @@ def create():
 
 
 # Define the healthcheck
-@app.rout('/healthz')
+@app.route('/healthz')
 def healthz():
     response = app.response_class(
-        response=json.dumps({}),
+        response=json.dumps({"result":'OK - healthy'}),
         status=200,
-        mimetype='applications/json'
+        mimetype='application/json'
     )
     app.logger.info("Status request successfull")
     logging.debug(f"{datetime.datetime.now()},{request.path} endpoint was reached.")
-    return json.dumps({"result": "OK - healthy"}), 200, {'ContentType': 'application/json'}
+    return response
 
-  
+# Define metrics
+@app.route('/metrics')  
+def metrics():
+    response = app.response_class(
+        response=json.dumps({'db_connection_count': db_connection_count, 'post_count': post_count}),
+        status=200,
+        mimetype='application/json'
+    )
+    app.logger.info("Metrics request successfull")
+    logging.debug(f"{datetime.datetime.now()},{request.path} endpoint was reached.")
+    return response
+
 # start the application on port 3111
 if __name__ == "__main__":
    app.run(host='0.0.0.0', port='3111')
