@@ -4,10 +4,37 @@ docker build -t techtrends .
 
 # Docker commands used to run the application
 # TODO: insert the docker run command
-docker run techtrends
+docker run -p 7111:3111 techtrends -d
 
 ## Docker commands used to get the application logs
 # TODO: insert the docker logs command
+docker container run -it techtrends /bin/bash
 
 ## Logs from the container running the TechTrends application
-# TODO: paste logs from the Docker container 
+INFO:werkzeug: * Running on http://0.0.0.0:3111/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [20/Aug/2021 14:53:17] "GET / HTTP/1.1" 200 -
+DEBUG:root:2021-08-20 14:53:18.881000, Article "2020 CNCF Annual Report" retrived
+INFO:werkzeug:127.0.0.1 - - [20/Aug/2021 14:53:18] "GET /1 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Aug/2021 14:53:20] "GET /create HTTP/1.1" 200 -
+DEBUG:root:2021-08-20 14:53:21.973000, A new article was created.
+INFO:werkzeug:127.0.0.1 - - [20/Aug/2021 14:53:21] "POST /create HTTP/1.1" 302 -
+DEBUG:root:2021-08-20 14:53:22.305000, A new article was created.
+INFO:werkzeug:127.0.0.1 - - [20/Aug/2021 14:53:22] "POST /create HTTP/1.1" 302 -
+INFO:werkzeug:127.0.0.1 - - [20/Aug/2021 14:53:22] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Aug/2021 14:53:26] "GET /health HTTP/1.1" 404 -
+INFO:app:Status request successfull
+INFO:werkzeug:127.0.0.1 - - [20/Aug/2021 14:53:32] "GET /healthz HTTP/1.1" 200 -
+INFO:app:Metrics request successfull
+DEBUG:root:2021-08-20 14:55:11.499000,Endpoint was reached.
+INFO:werkzeug:127.0.0.1 - - [20/Aug/2021 14:55:11] "GET /metrics HTTP/1.1" 200 -
+INFO:app:Metrics request successfull
+DEBUG:root:2021-08-20 14:55:12.471000,Endpoint was reached.
+INFO:werkzeug:127.0.0.1 - - [20/Aug/2021 14:55:12] "GET /metrics HTTP/1.1" 200 -
+DEBUG:root:2021-08-20 14:55:15.931000, Article "2020 CNCF Annual Report" retrived
+INFO:werkzeug:127.0.0.1 - - [20/Aug/2021 14:55:15] "GET /1 HTTP/1.1" 200 -
+DEBUG:root:2021-08-20 14:55:16.919000, Article "KubeCon + CloudNativeCon 2021" retrived    
+INFO:werkzeug:127.0.0.1 - - [20/Aug/2021 14:55:16] "GET /2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [20/Aug/2021 14:55:18] "GET / HTTP/1.1" 200 -
+INFO:app:Metrics request successfull
+DEBUG:root:2021-08-20 14:55:23.737000,Endpoint was reached.
+INFO:werkzeug:127.0.0.1 - - [20/Aug/2021 14:55:23] "GET /metrics HTTP/1.1" 200 -
