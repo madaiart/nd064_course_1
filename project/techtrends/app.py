@@ -102,7 +102,7 @@ def metrics():
         mimetype='application/json'
     )
     app.logger.info("Metrics request successfull")
-    logging.debug("{},{} endpoint was reached.".format(datetime.datetime.now()),request.path)
+    logging.debug("{},Endpoint was reached.".format(datetime.datetime.now()))
     return response
 
 # start the application on port 3111
