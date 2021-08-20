@@ -33,6 +33,8 @@ def get_post(post_id):
     connection.close()     
     return post
 
+
+
 # Define the main route of the web application 
 @app.route('/')
 def index():
@@ -48,16 +50,16 @@ def post(post_id):
     post = get_post(post_id)  
     
     if post is None:
-      logging.debug(f"{datetime.datetime.now()}, Non existing article")
-      return render_template('404.html'), 404
+        logging.debug("{}, Non existing article".format(datetime.datetime.now()))
+        return render_template('404.html'), 404
     else:
-      logging.debug(f"{datetime.datetime.now()}, Article \"{post['title']}\" retrived")    
+      logging.debug("{}, Article \"{}\" retrived".format(datetime.datetime.now(),post['title']))    
       return render_template('post.html', post=post)
 
 # Define the About Us page
 @app.route('/about')
 def about():
-    logging.debug(f"{datetime.datetime.now()}, \"About us\" retrieved")
+    logging.debug("{}, \"About us\" retrieved".format(datetime.datetime.now()))
     return render_template('about.html')
 
 # Define the post creation functionality 
@@ -74,7 +76,7 @@ def create():
             connection.execute('INSERT INTO posts (title, content) VALUES (?, ?)', (title, content))
             connection.commit()
             connection.close()
-            logging.debug(f"{datetime.datetime.now()}, A new article was created.")
+            logging.debug("{}, A new article was created.".format(datetime.datetime.now()))
 
             return redirect(url_for('index'))
 
@@ -100,7 +102,7 @@ def metrics():
         mimetype='application/json'
     )
     app.logger.info("Metrics request successfull")
-    logging.debug(f"{datetime.datetime.now()},{request.path} endpoint was reached.")
+    logging.debug("{},{} endpoint was reached.".format(datetime.datetime.now()),request.path)
     return response
 
 # start the application on port 3111
