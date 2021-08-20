@@ -1,33 +1,35 @@
 import sqlite3, datetime, logging
-
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 from werkzeug.exceptions import abort
+ 
+# Define the Flask application
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'your secret key'
+FORMAT = ''
+logging.basicConfig(filename='app.log', level=logging.DEBUG)
+
 
 # Total amount of posts in the database
 post_count = 0
 # Total amount of connections to the database
 db_connection_count = 0
+port=3111
 
 # Function to get a database connection.
 # This function connects to database with the name `database.db`
-def get_db_connection():
+def get_db_connection():      
     connection = sqlite3.connect('database.db')
     connection.row_factory = sqlite3.Row
-    db_connection_count = db_connection_count + 1
     return connection
 
 # Function to get a post using its ID
-def get_post(post_id):
+def get_post(post_id):    
     connection = get_db_connection()
-    post = connection.execute('SELECT * FROM posts WHERE id = ?',
-                        (post_id,)).fetchone()
-    connection.close()
-    post_count = post_count + 1
+    post = connection.execute('SELECT * FROM posts WHERE id = ?', (post_id,)).fetchone()
+    connection.close()     
     return post
 
-# Define the Flask application
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your secret key'
+
 
 # Define the main route of the web application 
 @app.route('/')
@@ -41,12 +43,13 @@ def index():
 # If the post ID is not found a 404 page is shown
 @app.route('/<int:post_id>')
 def post(post_id):
-    post = get_post(post_id)
+    post = get_post(post_id)  
+    
     if post is None:
       logging.debug(f"{datetime.datetime.now()}, Non existing article")
       return render_template('404.html'), 404
     else:
-      logging.debug(f"{datetime.datetime.now()}, Article \"{post.form['title']}\" retrived")
+      logging.debug(f"{datetime.datetime.now()}, Article \"{post['title']}\" retrived")    
       return render_template('post.html', post=post)
 
 # Define the About Us page
@@ -66,8 +69,7 @@ def create():
             flash('Title is required!')
         else:
             connection = get_db_connection()
-            connection.execute('INSERT INTO posts (title, content) VALUES (?, ?)',
-                         (title, content))
+            connection.execute('INSERT INTO posts (title, content) VALUES (?, ?)', (title, content))
             connection.commit()
             connection.close()
             logging.debug(f"{datetime.datetime.now()}, A new article was created.")
@@ -75,7 +77,6 @@ def create():
             return redirect(url_for('index'))
 
     return render_template('create.html')
-
 
 # Define the healthcheck
 @app.route('/healthz')
@@ -102,9 +103,5 @@ def metrics():
 
 # start the application on port 3111
 if __name__ == "__main__":
-   # Total amount of posts in the database
-   post_count = 0
-   # Total amount of connections to the database
-   db_connection_count = 0
-   app.run(host='0.0.0.0', port='3111')
+   app.run(host='0.0.0.0', port=port)
 
