@@ -18,7 +18,7 @@ jobs:
     ## Define a sequence of steps to be executed 
     steps:
     ## Building for dropbox
-    -
+      -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       -
