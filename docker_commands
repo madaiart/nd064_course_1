@@ -9,6 +9,7 @@ docker run -p 7111:3111 techtrends -d
 ## Docker commands used to get the application logs
 # TODO: insert the docker logs command
 docker container run -it techtrends /bin/bash
+cat app.log
 
 ## Logs from the container running the TechTrends application
 INFO:werkzeug: * Running on http://0.0.0.0:3111/ (Press CTRL+C to quit)
