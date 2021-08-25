@@ -34,9 +34,12 @@ jobs:
     ## For example, pytest and any defined packages within the requirements.txt file.
     - name: Install dependencies
       run: |
+        pwd
+        ls
+        cd techtrends
         python -m pip install --upgrade pip
         pip install  pytest 
-        if [ -f techtrends/requirements.txt ]; then pip install -r requirements.txt; fi
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     ## Run all pytests by inovking the `pytest command`
     ## - name: Test with pytest
       # run: |
