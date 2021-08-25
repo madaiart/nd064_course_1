@@ -19,6 +19,9 @@ jobs:
     steps:
     ## Building for dropbox
       -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       -
@@ -33,5 +36,9 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
+          file: ./Dockerfile
           push: true
           tags: madaicol/techtrends:latest
+      -
+        name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
