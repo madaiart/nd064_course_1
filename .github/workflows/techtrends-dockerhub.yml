@@ -34,4 +34,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: techtrends:latest
+          tags: madaicol/techtrends:latest
