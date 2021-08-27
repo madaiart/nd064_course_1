@@ -1,10 +1,10 @@
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sandbox
+  name: deployment
   namespace: sandbox
   labels:
-    app: techtrens
+    app: techtrends
 spec:
   replicas: 1
   selector:
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: techtrends
-        image: techtrends:latest
+        image: madaicol/techtrends:latest
         ports:
         - containerPort: 3111
         livenessProbe:
