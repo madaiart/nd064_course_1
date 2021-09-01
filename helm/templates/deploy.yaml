@@ -2,11 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: deployment
-  namespace: sandbox
+  namespace: {{ .Values.namespace.name }}
   labels:
     app: techtrends
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: techtrends
@@ -16,15 +16,25 @@ spec:
         app: techtrends
     spec:
       containers:
-      - name: techtrends
-        image: madaicol/techtrends:latest
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        resources:
+          requests:
+            memory: {{ .Values.resources.requests.memory}}
+            cpu: {{ .Values.resources.requests.CPU}}
+          limits:
+            memory: {{ .Values.resources.limits.memory}}
+            cpu: {{ .Values.resources.limits.CPU}}
+
         ports:
-        - containerPort: 3111
+        - containerPort: {{ .Values.containerPort }} 
         livenessProbe:
            httpGet:
               path: /healthz
-              port: 3111
+              port:  {{ .Values.containerPort }}
         readinessProbe:
            httpGet:
               path: /healthz
-              port: 3111
+              port: {{ .Values.containerPort }} 
