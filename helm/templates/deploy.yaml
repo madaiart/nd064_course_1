@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  namespace: sandbox
+  labels:
+    app: techtrends
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: techtrends
+  template:
+    metadata:
+      labels:
+        app: techtrends
+    spec:
+      containers:
+      - name: techtrends
+        image: madaicol/techtrends:latest
+        ports:
+        - containerPort: 3111
+        livenessProbe:
+           httpGet:
+              path: /healthz
+              port: 3111
+        readinessProbe:
+           httpGet:
+              path: /healthz
+              port: 3111

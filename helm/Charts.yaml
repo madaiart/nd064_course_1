@@ -1,0 +1,9 @@
+apiVersion: v1
+name: techtrends
+description: Nanodegree techtrends program - Madai Arteaga
+keywords:
+- techtrends
+version:1.0.0
+maintainers:
+- name: madai
+  email: artmadai@hotmail.com
