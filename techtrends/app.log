@@ -95,3 +95,17 @@ INFO:werkzeug:127.0.0.1 - - [20/Aug/2021 14:55:18] "GET / HTTP/1.1" 200 -
 INFO:app:Metrics request successfull
 DEBUG:root:2021-08-20 14:55:23.737000,Endpoint was reached.
 INFO:werkzeug:127.0.0.1 - - [20/Aug/2021 14:55:23] "GET /metrics HTTP/1.1" 200 -
+[2021-09-02 19:48:11,792] INFO in _internal:  * Running on http://0.0.0.0:3111/ (Press CTRL+C to quit)
+[2021-09-02 19:48:44,276] INFO in _internal: 127.0.0.1 - - [02/Sep/2021 19:48:44] "GET / HTTP/1.1" 200 -
+[2021-09-02 19:48:44,789] INFO in _internal: 127.0.0.1 - - [02/Sep/2021 19:48:44] "GET /static/css/main.css HTTP/1.1" 200 -
+[2021-09-02 19:48:44,854] INFO in _internal: 127.0.0.1 - - [02/Sep/2021 19:48:44] "GET /favicon.ico HTTP/1.1" 404 -
+[2021-09-02 19:48:49,273] DEBUG in app: 2021-09-02 19:48:49.273000, Article "2020 CNCF Annual Report" retrived
+[2021-09-02 19:48:49,279] INFO in _internal: 127.0.0.1 - - [02/Sep/2021 19:48:49] "GET /1 HTTP/1.1" 200 -
+[2021-09-02 19:48:52,375] DEBUG in app: 2021-09-02 19:48:52.375000, "About us" retrieved
+[2021-09-02 19:48:52,382] INFO in _internal: 127.0.0.1 - - [02/Sep/2021 19:48:52] "GET /about HTTP/1.1" 200 -
+[2021-09-02 19:48:53,378] INFO in _internal: 127.0.0.1 - - [02/Sep/2021 19:48:53] "GET /create HTTP/1.1" 200 -
+[2021-09-02 19:48:54,523] INFO in _internal: 127.0.0.1 - - [02/Sep/2021 19:48:54] "GET / HTTP/1.1" 200 -
+[2021-09-02 19:48:55,480] INFO in _internal: 127.0.0.1 - - [02/Sep/2021 19:48:55] "GET / HTTP/1.1" 200 -
+[2021-09-02 19:49:01,029] INFO in app: Metrics request successfull
+[2021-09-02 19:49:01,029] DEBUG in app: 2021-09-02 19:49:01.029000,Endpoint was reached.
+[2021-09-02 19:49:01,029] INFO in _internal: 127.0.0.1 - - [02/Sep/2021 19:49:01] "GET /metrics HTTP/1.1" 200 -

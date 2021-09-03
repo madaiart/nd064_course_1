@@ -1,13 +1,18 @@
-import sqlite3, datetime, logging
+import sqlite3, datetime, logging, sys
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 from werkzeug.exceptions import abort
  
 # Define the Flask application
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your secret key'
-FORMAT = ''
-logging.basicConfig(filename='app.log', level=logging.DEBUG)
 
+# set logger to handle STDOUT and STDERR
+stdout_handler = logging.StreamHandler(sys.stdout)
+stderr_handler = logging.StreamHandler(sys.stderr)
+handlers = [stderr_handler, stdout_handler]
+
+#format output
+format_output = "[%(asctime)s] %(levelname)s in %(module)s: %(message)s"
+logging.basicConfig(format=format_output, level=logging.DEBUG, handlers=handlers, filename='app.log')
 
 # Total amount of posts in the database
 post_count = 0
@@ -32,7 +37,6 @@ def get_post(post_id):
     post = connection.execute('SELECT * FROM posts WHERE id = ?', (post_id,)).fetchone()
     connection.close()     
     return post
-
 
 
 # Define the main route of the web application 
